@@ -1,0 +1,40 @@
+
+
+entity Item {
+	code   Long,
+    description String,
+    price Double,
+	status Status,
+    creationDate Date
+}
+
+entity Supplier {
+	name String required,
+    country String
+}
+
+entity PriceReduction {
+	reducedPrice Double,
+    startDate Date,
+    endDate Date
+}
+entity ItemDiscontinuedAction{
+	date Date,
+    description String,
+    item Item,
+    user User
+}
+
+enum Status {
+  Available,
+  Discontinued
+}
+
+relationship OneToMany {
+  Item to PriceReduction,
+  Item to ItemDiscontinuedAction
+}
+relationship ManyToMany {
+  Item{supplier} to Supplier{item}
+}
+  
